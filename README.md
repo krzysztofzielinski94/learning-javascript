@@ -3,6 +3,8 @@ In this repository you can find simple examples written in JavaScript.
 
 ## Contents
 1. Complex number calculator
+* Object-oriented programming
+* Regular expression
 
 ## Installing 
 ```
