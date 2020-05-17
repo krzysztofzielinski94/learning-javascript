@@ -2,10 +2,12 @@
 In this repository you can find simple examples written in JavaScript. 
 
 ## Contents 
-1. Complex number calculator 
+Complex number calculator 
 * Object-oriented programming
 * Regular expression
 
+Bit Shifting
+* Math operations
 
 
 ## Installing 
