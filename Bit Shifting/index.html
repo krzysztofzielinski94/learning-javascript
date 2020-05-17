@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Bit shifting</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>    
+
+    <body>
+        <div class="container">
+            <div class="card">
+                <div class="card-header text-center">
+                    Bit shifting operations
+                </div>
+                
+                <div class="card-body d-flex justify-content-center">
+                    <form class="form">
+
+                        <div class="form-group">
+                            <input id="number" type="number" class="form-control text-right" value=0>
+                        </div>
+                        
+                        <div class="form-group text-center">1
+                            <button type="button" class="btn btn-light" onclick="convertToBit()">=</button>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-light" onclick="convertToBit('right')">>></button>
+                            </div>
+                            <div class="col">
+                                <h3 class="bits" id="bits">00000000000000000000000000000000</h3>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-light" onclick="convertToBit('left')"> <<</button>
+                            </div>
+                        </div>
+                   
+                         
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+
+</html>

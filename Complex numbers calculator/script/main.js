@@ -47,11 +47,6 @@ class Complex{
     }
 }
 
-function add(complex1, complex2, result){
-    result.add(complex1, complex2);
-    document.getElementById("result").value = result.show();    
-}
-
 function substract(complex1, complex2, result){
     result.substract(complex1, complex2);
     document.getElementById("result").value = result.show();  
