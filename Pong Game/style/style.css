@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+h1 {
+    color: white;
+}
+
+.grid-container {
+    display:inline-block;
+    position:relative;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    border: solid 1px white;
+    width: 600px;
+    height: 400px;
+}
+
+.grid div {
+    width: 40px;
+    height: 40px;
+}
+
+.box {
+    background-color: rgb(255, 255, 255);
+}
+
+.ball {
+    background-color: rgb(255, 255, 255);
+}
+

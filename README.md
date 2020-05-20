@@ -9,6 +9,9 @@ Complex number calculator
 Bit Shifting
 * Math operations
 
+Pong Game
+* addEventListener
+* HTML grids
 
 ## Installing 
 ```
@@ -21,3 +24,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 ## Acknowledgments
 
 * Stack Overflow Community
+* Ania Kubów for series of JS tutorials
