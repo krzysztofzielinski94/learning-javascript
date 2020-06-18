@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Currency Calculator</title>
+  </head>
+  <body>
+
+    <div class="container">
+        <div id="app">
+            <currency-converter></currency-converter>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script type="text/x-template" id="currency-converter-template">
+        <div class="card" style="margin-top: 10px;">
+            <div class="card-header" style="text-align: center;">
+                <h2>Currency Converter</h2>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">European Central Bank</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Reference rate {{rate.base}} from {{rate.date}}</h6>
+
+                    <form class="form-inline justify-content-center">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <input type="text" class="form-control" id="input_currency_from" @keyup="calculate_from" :value="value_from">
+                        </div>
+                
+                        <div class="dropdown">
+                            <button class="btn btn-light mb-2 dropdown-toggle" type="button" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{currency_from}}</button>
+                            <div class="dropdown-menu" style="overflow-y: scroll; max-height: 200px;" aria-labelledby="dropdownMenuButton">
+                                <a id="a_currency_from" class="dropdown-item" @click="change_currency_from(key)" v-for="(item, key, index) in rate.rates">{{key}}</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group mx-sm-3 mb-2">
+                            <input type="text" class="form-control" id="input_currency_to" @keyup="calculate_to" :value="value_to">
+                        </div>
+                        
+                        <div class="dropdown">
+                            <button class="btn btn-light mb-2 dropdown-toggle" type="button" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{currency_to}}</button>
+                            <div class="dropdown-menu" style="overflow-y: scroll; max-height: 200px;" aria-labelledby="dropdownMenuButton">
+                                <a id="a_currency_to" class="dropdown-item" @click="change_currency_to(key)" v-for="(item, key, index) in rate.rates">{{key}}</a>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <a :href="ecb_api" class="card-link">European Central Bank</a>
+                    <a :href="currency_api" class="card-link">JSON format</a>
+            </div>
+        </div>
+    </script>
+
+    <script>
+
+        Vue.component('currency-converter', {
+            template: "#currency-converter-template",
+            data(){
+                return {
+                    rate: {},
+                    currency_from: "EUR",
+                    currency_to: "PLN",
+                    value_from: 1,
+                    value_to: 0,
+                    currency_api: "https://api.exchangeratesapi.io/latest",
+                    ecb_api: "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
+                }
+            },
+            methods: {
+                change_currency_from: function (key_from){
+                    this.currency_from = key_from
+                    this.calculate_from()
+                },
+                change_currency_to: function (key_to){
+                    this.currency_to = key_to
+                    this.calculate_to()
+                },
+                calculate_from: function(){
+                    this.value_from = document.getElementById("input_currency_from").value
+                    this.value_to = document.getElementById("input_currency_to").value
+                    this.value_to = ((this.value_from / this.rate['rates'][this.currency_from]) * this.rate['rates'][this.currency_to]).toFixed(2)
+                },
+                calculate_to: function(){
+                    this.value_from = document.getElementById("input_currency_from").value
+                    this.value_to = document.getElementById("input_currency_to").value
+                    this.value_from = ((this.value_to / this.rate['rates'][this.currency_to]) * this.rate['rates'][this.currency_from]).toFixed(2)
+                }
+            },
+            created(){
+                axios.get(this.currency_api)
+                    .then(response => {
+                        this.rate = response.data
+                        this.rate['rates']['EUR'] = 1
+                        this.calculate_from()                        
+                    })
+                    .catch(err => {
+                        console.log('Error occured ' + err)
+                    })
+            }
+        })
+
+        new Vue({
+            el: "#app"
+        })
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
