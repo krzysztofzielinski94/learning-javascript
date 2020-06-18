@@ -13,6 +13,11 @@ Pong Game
 * addEventListener
 * HTML grids
 
+Currency Converter
+* Vue Components
+* Templates
+
+
 ## Installing 
 ```
 Download the project and have fun
