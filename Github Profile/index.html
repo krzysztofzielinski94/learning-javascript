@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>GET / Github Profile</title>
+  </head>
+  <body style="background-color: gray;">
+    <div id="app" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+      <github-user-card :username="username"></github-user-card>
+    </div>
+    
+    <script type="text/x-template" id="github-user-card-template">
+          <div class="card" style="width: 400px;">
+            <div class="card-header">
+              <img :src="user.avatar_url" class="card-img" alt="avatar">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <a :href="`https://github.com/krzysztofzielinski94`">{{user.name}}</a>
+              </h5>
+              
+              <p class="card-text">{{user.bio}}</p>
+              <hr>
+              <p class="text-secondary">Joined in {{user.created_at}}<br><small class="text-muted">Last updated {{user.updated_at}}</small></p>
+            </div>
+        </div>
+    </script>
+    
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      Vue.component('github-user-card', {
+        template: "#github-user-card-template",
+        props: {
+          username: {
+            type: String, 
+            required: true
+          }
+        },
+        data(){
+          return {
+            user: {}
+          }
+        },
+        created (){
+          axios.get(`https://api.github.com/users/${this.username}`)
+            .then(response => {
+              this.user = response.data
+              var date_format = new Date(this.user['updated_at'])
+              var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+              this.user['updated_at'] = (date_format.getDay() + " " +  months[date_format.getMonth()] + " " +  date_format.getFullYear())
+              date_format = new Date(this.user['created_at'])
+              this.user['created_at'] = (months[date_format.getMonth()] + " " +  date_format.getFullYear())
+            })
+        }
+      })
+    
+      new Vue({
+        el: '#app',
+        data: {
+          username: "krzysztofzielinski94"
+        }
+      })
+    </script>
+
+  </body>
+</html>

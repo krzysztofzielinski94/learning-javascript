@@ -17,6 +17,9 @@ Currency Converter
 * Vue Components
 * Templates
 
+#GitHub Profile
+* GitHub API
+* Vue JS
 
 ## Installing 
 ```
@@ -30,3 +33,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 
 * Stack Overflow Community
 * Ania Kubów for series of JS tutorials
+* VueSchool tutorials
