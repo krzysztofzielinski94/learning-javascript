@@ -17,9 +17,13 @@ Currency Converter
 * Vue Components
 * Templates
 
-#GitHub Profile
+GitHub Profile
 * GitHub API
 * Vue JS
+
+Calculator
+* HTML Grid
+* Vue methods
 
 ## Installing 
 ```
