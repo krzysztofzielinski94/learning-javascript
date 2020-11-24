@@ -2,6 +2,9 @@
 In this repository you can find simple examples written in JavaScript. 
 
 ## Contents 
+Simple CV
+* First CV project
+
 Complex number calculator 
 * Object-oriented programming
 * Regular expression
